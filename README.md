@@ -1,6 +1,16 @@
-# 💈 Gu Cortes - Sistema de Agendamento Digital
+# 💈 Gu Cortes - Plataforma Digital de Agendamento
 
-Um sistema dinâmico e completo de agendamento online desenvolvido especialmente para barbearias. Focado em alta conversão na interface (UI/UX), design responsivo moderno (*mobile-first*) e regras de negócio avançadas para impedir que dois clientes agendem no mesmo segundo. O projeto integra sincronização em tempo real nativa com o **Google Calendar** para o barbeiro e persistência segura em PostgreSQL através do **Supabase**.
+> **Transformando o agendamento de serviços em uma experiência fluida, sem falhas e altamente escalável.**
+
+Este projeto nasceu da necessidade real de modernizar uma barbearia com alto volume de clientes, substituindo os congestionamentos manuais no WhatsApp por uma plataforma autônoma e `mobile-first`. Muito além de uma simples vitrine de horários, a aplicação foi desenhada para resolver arquiteturalmente um dos maiores problemas de negócios locais que operam com reservas em tempo real: o conflito silencioso de horários simultâneos (*race conditions* e *double-booking*).
+
+### 🎯 O Desafio & Visão do Produto
+Garantir total integridade na agenda comercial de um profissional, oferecendo aos clientes finais (frequentemente navegando via 4G/Celular) uma conversão super-rápida, com interações modernas e sem nenhum atrito. O administrador, por sua vez, precisava que as entradas orbitassem entorno da ferramenta que ele já domina e monitora: o **Google Agenda**.
+
+### 💡 Arquitetura e Engenharia Aplicada
+Para blindar o sistema, este ecossistema se baseia em uma camada dupla de confiança:
+1. **Segurança Transacional via PostgreSQL (Supabase):** Implementação de Restrições de Exclusividade Cruzada (_overlap constraints_) operando no nível fundamental do banco de dados (recorrendo a `tsrange` e índices multivariáveis `GiST`). Esse bloqueio imperativo torna a criação das vagas **absolutamente atômica**.
+2. **Gateway com Google APIs:** Backend em Next.js (Edge Functions) operando sob credenciais protegidas de uma _Service Account_ da Google Cloud, atuando em harmonia com as transações SQL para pintar agendamentos bidirecionalmente no Google Calendar nativo do profissional.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
