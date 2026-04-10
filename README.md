@@ -1,8 +1,15 @@
-# 💈 Gu Cortes - Plataforma Digital de Agendamento
+# 💈 Gu Cortes
 
-> **Transformando o agendamento de serviços em uma experiência fluida, sem falhas e altamente escalável.**
+### A sofisticação do corte tradicional aliada à precisão da engenharia de software.
 
-Este projeto nasceu da necessidade real de modernizar uma barbearia com alto volume de clientes, substituindo os congestionamentos manuais no WhatsApp por uma plataforma autônoma e `mobile-first`. Muito além de uma simples vitrine de horários, a aplicação foi desenhada para resolver arquiteturalmente um dos maiores problemas de negócios locais que operam com reservas em tempo real: o conflito silencioso de horários simultâneos (*race conditions* e *double-booking*).
+[![Licença: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+
+---
+
+O **Gu Cortes** não é apenas uma interface de agendamento. É uma solução de infraestrutura pensada para resolver a fricção entre cliente e profissional. Desenvolvido com **Next.js 15**, o sistema utiliza camadas de persistência atômica para garantir que cada minuto da agenda seja respeitado, sincronizando tudo em tempo real com o ecossistema Google.
 
 ### 🎯 O Desafio & Visão do Produto
 Garantir total integridade na agenda comercial de um profissional, oferecendo aos clientes finais (frequentemente navegando via 4G/Celular) uma conversão super-rápida, com interações modernas e sem nenhum atrito. O administrador, por sua vez, precisava que as entradas orbitassem entorno da ferramenta que ele já domina e monitora: o **Google Agenda**.
