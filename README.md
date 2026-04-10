@@ -1,20 +1,70 @@
+# 💈 Gu Cortes - Sistema de Agendamento Digital
+
+Um sistema dinâmico e completo de agendamento online desenvolvido especialmente para barbearias. Focado em alta conversão na interface (UI/UX), design responsivo moderno (*mobile-first*) e regras de negócio avançadas para impedir que dois clientes agendem no mesmo segundo. O projeto integra sincronização em tempo real nativa com o **Google Calendar** para o barbeiro e persistência segura em PostgreSQL através do **Supabase**.
+
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Supabase](https://img.shields.io/badge/Supabase-DB-3ECF8E?style=for-the-badge&logo=supabase)
+![Google Calendar](https://img.shields.io/badge/Google_Calendar-API-4285F4?style=for-the-badge&logo=google-calendar)
+
+## ✨ Principais Funcionalidades
+
+- **Prevenção Realística de Agendamento Duplo**: Criação nativa de regras de banco (_overlap constraints_ exclusivas) direto no PostgreSQL para mitigar colisões de segundos ou falhas de Race Condition.
+- **Sincronização 2-Way Google Calendar**: A ponte de Service Account gera, modifica e limpa eventos de agenda direto no Google Agenda mestre da barbearia à medida que os clientes realizam e cancelam marcações via app.
+- **Painel Administrativo Privado**: Um portal prático e rápido para listagem dos agendamentos do dia, deleção forçada, e gerenciamento dos pacotes listados.
+- **Conceitos UI/UX Polidos**: Foco na fluidez. Utilizando animações e tempos de carregamento falsos reduzidos (*skeletons/loading states*) para que o cliente da barbearia navegue de maneira rica pelo celular.
+
+## 🚀 Tecnologias e Stack
+
+- **Framework Web:** [Next.js](https://nextjs.org/) (App Directory e Server Actions)
+- **Estilização e Componentes:** [Tailwind CSS 4.0](https://tailwindcss.com/) + CSS puro para transições. 
+- **Linguagem:** TypeScript puro; focado em verificação estática das rotas back-end.
+- **Bancos Remotos:** [Supabase](https://supabase.com/).
+- **Integração:** Google OAuth2 Client (`googleapis`) para gerir calendário.
+
+## ⚙️ Como Executar o Projeto Localmente
+
+> **Aviso de Credenciais:** Para rodar a autenticação de banco de dados e os serviços de sincronia, será necessário uma conta padrão gratuita no Supabase e uma Service Account válida na Google Cloud (com GCal ativado). Consulte o modelo estático no `.env.example`.
+
+**1. Faça o Clone deste repositório:**
+```sh
+git clone https://github.com/JaoV1ctor/Gu-cortes.git
+cd Gu-cortes
+```
+
+**2. Instale as dependências com NPM:**
+```sh
+npm install
+```
+
+**3. Configure as Chaves (Variáveis de Ambiente):**
+Em seu diretório clonado, duplique e renomeie o `.env.example` para `.env.local`:
+```sh
+cp .env.example .env.local
+```
+> Após copiar, injete a Anon Key e o host do Supabase, o seu e-mail do Google, e crie o arquivo **`credentials.json`** na pasta raiz apontando sua Service Account (formato gerado pelo Google).
+
+**4. Execute o servidor Next local no ambiente de desenvolvimento:**
+```sh
+npm run dev
+```
+
+**5. Validação:**
+O app deverá se hospedar e escutar tráfegos pela interface `http://localhost:3000`. Acesse as pastas `app/admin` para verificar os protótipos listados.
+
+## 🗄 Infraestrutura do Banco (PostgreSQL)
+
+O projeto usa `B-Tree` mistas para calcular reservas ativas nos dados das consultas. Suas tabelas primárias são:
+
+- **`appointments`**: Histórico bruto. Valida em tempo direto com *tsrange*. Recebe registros primários `id`, dados dos usuários e o retorno persistente em ID da sincronia do calendário externo via Web API.
+- **`services`**: Painel flexível puxando dinamicamente e injetando as fotos enviadas no agendamento. 
+
+Caso queira injetar do zero: Dê uma olhada nos comandos DDL exportados na pasta `architecture/`.
+
+---
+
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Repositório mantido e montado sob arquitetura serveless (funções de ponta - Edge/Vercel) para portfólio de engenharia.<br/> 
+<b>Desenvolvido por João Victor</b>. 🧑‍💻
 </div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/6a279e83-f039-4949-a7d8-0a7f4a672e96
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
